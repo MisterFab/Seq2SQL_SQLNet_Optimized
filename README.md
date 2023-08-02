@@ -2,6 +2,8 @@
 
 Run download_embedding.py to download glove word embeddings.
 
-```python download_embedding.py```
+```bash
+python download_embedding.py
+```
 
 Run train.py and modify the config as you please.
