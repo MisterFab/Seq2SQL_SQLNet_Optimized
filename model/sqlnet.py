@@ -18,7 +18,7 @@ class SQLNet(nn.Module):
                  trainable_embedding: bool = False) -> None:
         super().__init__()
 
-        self.device = torch.device('cuda' if torch.cuda.is_available() and use_gpu else 'cpu')
+        self.device = torch.device('cuda' if use_gpu else 'cpu')
         self.trainable_embedding = trainable_embedding
         self.hidden_size = hidden_size
         self.num_layers = num_layers

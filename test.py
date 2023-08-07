@@ -4,12 +4,11 @@ from model.seq2sql import Seq2SQL
 from model.sqlnet import SQLNet
 
 model_config = {
-    'model': 'SQLNet',  # SQLNet or Seq2SQL
-    'num_epochs': 100,
+    'model': 'SQLNet',              # SQLNet or Seq2SQL
     'batch_size': 64,
-    'dataset_id': 0,    # 0 for original, 1 for re-split dataset
-    'use_column_attention': True,
-    'trainable_embedding': False,
+    'dataset_id': 0,                # 0 for original, 1 for re-split dataset
+    'use_column_attention': True,   # Seq2SQL does not support column attention
+    'trainable_embedding': False,   # Seq2SQL does not support trainable embedding
     'embedding_path': 'glove/glove.42B.300d.txt'
 }
 

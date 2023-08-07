@@ -75,7 +75,7 @@ class ConditionPredictor(nn.Module):
         time_step = 0
 
         current_input = torch.zeros((batch_size, 1, self.max_token_num), dtype=torch.float32, device=self.device)
-        current_input[:,0,7] = 1
+        current_input[:,0,7].fill_(1)
         current_hidden_state = decoder_hidden_state
         output_hidden_state = self.condition_out_h(expanded_encoded_question)
 

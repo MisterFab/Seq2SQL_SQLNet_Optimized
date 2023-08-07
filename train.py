@@ -3,6 +3,9 @@ import datetime
 from model.seq2sql import Seq2SQL
 from model.sqlnet import SQLNet
 from utils import *
+import time
+
+start_time = time.time()
 
 model_config = {
     'model': 'SQLNet',              # SQLNet or Seq2SQL
@@ -39,7 +42,6 @@ class ModelTrainer:
 
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=config['learning_rate'], weight_decay = 0)
 
-        self.epoch_loss = []
         self.best_agg_epoch, self.best_sel_epoch, self.best_cond_epoch = 0, 0, 0
 
     def load_model(self, model_type):
@@ -52,19 +54,18 @@ class ModelTrainer:
             self.load_model("Aggregate")
             self.load_model("Select")
             self.load_model("Condition")
-    
+        
         initial_accuracy = epoch_accuracy(self.model, self.batch_size, self.val_sql_data, self.val_table_data)
         print(f"Initial overall accuracy: {initial_accuracy[0]}\nBreakdown on (agg, sel, where): {initial_accuracy[1]}")
-
+        
         best_agg_accuracy, best_sel_accuracy, best_cond_accuracy = initial_accuracy[1]
         
         for i in range(self.num_epochs):
             print(f'Epoch: {i+1} / {datetime.datetime.now()}')
 
             loss = epoch_train(self.model, self.optimizer, self.batch_size, self.train_sql_data, self.train_table_data)
-            self.epoch_loss.append(loss)
             print(f"Loss: {loss}")
-
+ 
             validation_accuracy = epoch_accuracy(self.model, self.batch_size, self.val_sql_data, self.val_table_data)
             print(f"Validation overall accuracy: {validation_accuracy[0]}\nBreakdown on (agg, sel, where): {validation_accuracy[1]}")
 
@@ -87,7 +88,7 @@ class ModelTrainer:
 
             print(f"Best validation accuracy: {best_agg_accuracy, best_sel_accuracy, best_cond_accuracy}", 
                   f"Best epoch: {self.best_agg_epoch, self.best_sel_epoch, self.best_cond_epoch}")
-
+ 
     def save_model(self, model_type):
         torch.save(getattr(self.model, f"{model_type}Predictor").state_dict(), 
                    f"saved_models/{self.model_name}_best_{model_type.lower()}_model")
@@ -97,3 +98,7 @@ class ModelTrainer:
     
 model_trainer = ModelTrainer(model_config)
 model_trainer.train()
+
+end_time = time.time()
+execution_time_program = end_time - start_time
+print(f"Execution time: {execution_time_program} seconds")
