@@ -24,8 +24,6 @@ class ConditionPredictor(nn.Module):
         self.condition_out_h = nn.Linear(hidden_size, hidden_size)
         self.condition_out = nn.Sequential(nn.Tanh(), nn.Linear(hidden_size, 1))
 
-        self.softmax = nn.Softmax(dim=1)
-
         self.to(self.device)
 
     def forward(self, 

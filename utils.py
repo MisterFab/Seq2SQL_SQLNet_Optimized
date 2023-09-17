@@ -22,7 +22,7 @@ def load_dataset(dataset_id: int) -> Tuple[List[Dict], Dict[str, Dict]]:
                 'data/dev_tok.tables.jsonl')
         test_sql_data, test_table_data = load_data('data/test_tok.jsonl',
                 'data/test_tok.tables.jsonl')
-    else:
+    elif dataset_id == 1:
         print("Loading from re-split dataset")
         sql_data, table_data = load_data('data_resplit/train.jsonl',
                 'data_resplit/tables.jsonl')
@@ -30,6 +30,21 @@ def load_dataset(dataset_id: int) -> Tuple[List[Dict], Dict[str, Dict]]:
                 'data_resplit/tables.jsonl')
         test_sql_data, test_table_data = load_data('data_resplit/test.jsonl',
                 'data_resplit/tables.jsonl')
+    elif dataset_id == 2:
+        print("Loading test data from altered questions dataset 1")
+        test_sql_data, test_table_data = load_data('data/altered_questions_1.jsonl',
+                'data/test_tok.tables.jsonl')
+        return None, None, None, None, test_sql_data, test_table_data
+    elif dataset_id == 3:
+        print("Loading test data from altered questions dataset 2")
+        test_sql_data, test_table_data = load_data('data/altered_questions_2.jsonl',
+                'data/test_tok.tables.jsonl')
+        return None, None, None, None, test_sql_data, test_table_data
+    elif dataset_id == 4:
+        print("Loading test data from altered questions dataset 3")
+        test_sql_data, test_table_data = load_data('data/altered_questions_3.jsonl',
+                'data/test_tok.tables.jsonl')
+        return None, None, None, None, test_sql_data, test_table_data
         
     return sql_data, table_data, val_sql_data, val_table_data, test_sql_data, test_table_data
 

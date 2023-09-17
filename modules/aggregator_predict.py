@@ -22,12 +22,13 @@ class AggregatePredictor(nn.Module):
         else:
             self.aggregate_attention = nn.Linear(hidden_size, 1)
 
+        self.softmax = nn.Softmax(dim=1)
+
         self.aggregate_output = nn.Sequential(
             nn.Linear(hidden_size, hidden_size),
             nn.Tanh(),
             nn.Linear(hidden_size, 6)
         )
-        self.softmax = nn.Softmax(dim=1)
 
         self.to(self.device)
 

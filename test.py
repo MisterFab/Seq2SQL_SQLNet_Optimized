@@ -6,7 +6,7 @@ from model.sqlnet import SQLNet
 model_config = {
     'model': 'SQLNet',              # SQLNet or Seq2SQL
     'batch_size': 64,
-    'dataset_id': 0,                # 0 for original, 1 for re-split dataset
+    'dataset_id': 4,                # 0 for original, 1 for re-split dataset, 2 for altered questions 1, 3 for altered questions 2, 4 for altered questions 3
     'use_column_attention': True,   # Seq2SQL does not support column attention
     'trainable_embedding': False,   # Seq2SQL does not support trainable embedding
     'embedding_path': 'glove/glove.42B.300d.txt'
