@@ -9,6 +9,9 @@ Before you begin, you'll need to download and extract the GloVe word embeddings.
 ```bash
 python download_embedding.py
 ```
+## Alter questions
+
+To generate altered questions through GPT-4 API, run alter_questions.py.
 
 ## Training
 
